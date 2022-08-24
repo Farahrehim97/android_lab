@@ -1,0 +1,132 @@
+XML
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+
+    <EditText
+        android:id="@+id/num1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="FirstNumber" />
+
+    <EditText
+        android:id="@+id/num2"
+        android:layout_width="156dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="SecondNumber" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/num3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Result" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <Button
+
+        android:id="@+id/add"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="+"
+        android:onClick="add"
+        />
+
+    <Button
+        android:id="@+id/sub"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="-"
+        android:onClick="sub"/>
+
+    <Button
+        android:id="@+id/mul"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="*"
+        android:onClick="mul"/>
+
+    <Button
+        android:id="@+id/div"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="/"
+        android:onClick="div"/>
+    </LinearLayout>
+</LinearLayout>
+
+JAVA
+package com.example.q2_co1;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class MainActivity extends AppCompatActivity {
+EditText e1,e2,r;
+Button b1,b2,b3,b4;
+String s1,s2;
+Integer num1,num2,result;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        e1=(EditText) findViewById(R.id.num1);
+        e2=(EditText) findViewById(R.id.num2);
+        r=(EditText) findViewById(R.id.num3);
+        b1=(Button) findViewById(R.id.add);
+        b2=(Button) findViewById(R.id.sub);
+        b3=(Button) findViewById(R.id.mul);
+        b4=(Button) findViewById(R.id.div);
+        s1=e1.getText().toString();
+        s2=e2.getText().toString();
+        num1=Integer.parseInt(s1);
+        num2=Integer.parseInt(s2);
+    }
+    public void add(View v)
+    {
+        result=num1+num2;
+        r.setText(Integer.toString(result));
+    }
+    public void sub(View v)
+    {
+        result=num1-num2;
+        r.setText(Integer.toString(result));
+    }
+    public void mul(View v)
+    {
+
+    }public void div(View v)
+    {
+
+    }
+
+}
