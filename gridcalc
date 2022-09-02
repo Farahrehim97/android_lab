@@ -1,0 +1,275 @@
+XML
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:columnCount="4"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <GridLayout
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/ed1h"
+            android:layout_width="match_parent"
+            android:layout_height="83dp"
+            android:layout_columnSpan="4"
+            android:layout_gravity="fill_horizontal">
+
+        </EditText>
+
+
+    </GridLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bu1"
+            android:onClick="NumberEvent"
+            android:text="1"
+            />
+        <Button
+            android:id="@+id/bu2"
+            android:onClick="NumberEvent"
+            android:text="2"
+
+            />
+        <Button
+            android:id="@+id/bu3"
+            android:onClick="NumberEvent"
+            android:text="3"
+            />
+        <Button
+            android:id="@+id/buplus"
+            android:onClick="OperatorEvent"
+            android:text="+"
+            />
+    </GridLayout>
+
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bu4"
+            android:onClick="NumberEvent"
+            android:text="4"
+            />
+        <Button
+            android:id="@+id/bu5"
+            android:onClick="NumberEvent"
+            android:text="5"
+            />
+        <Button
+            android:id="@+id/bu6"
+            android:onClick="NumberEvent"
+            android:text="6"
+            />
+        <Button
+            android:id="@+id/buminus"
+            android:onClick="OperatorEvent"
+            android:text="-"
+            />
+    </GridLayout>
+
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/bu7"
+            android:onClick="NumberEvent"
+            android:text="7"
+            />
+        <Button
+            android:id="@+id/bu8"
+            android:onClick="NumberEvent"
+            android:text="8"
+            />
+        <Button
+            android:id="@+id/bu9"
+            android:onClick="NumberEvent"
+            android:text="9"
+            />
+        <Button
+            android:id="@+id/bumul"
+            android:onClick="OperatorEvent"
+            android:text="*"
+            />
+    </GridLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bu0"
+            android:onClick="NumberEvent"
+            android:text="0"
+            />
+        <Button
+            android:id="@+id/budivide"
+            android:onClick="OperatorEvent"
+            android:text="/"
+            />
+
+        <Button
+            android:id="@+id/bu1equals"
+            android:onClick="EqualEvent"
+            android:text="="
+            />
+
+        <Button
+            android:id="@+id/bu1clr"
+            android:onClick="NumberEvent"
+            android:text="Clr"
+            />
+
+
+    </GridLayout>
+
+
+
+
+</GridLayout>
+
+
+
+JAVA
+package com.example.gridcalc;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+
+public class MainActivity extends AppCompatActivity {
+
+
+    String oldNumber="";
+    String op="+";
+    boolean isNewOp= true;
+    EditText ed1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ed1=findViewById(R.id.ed1h);
+    }
+
+
+    public void NumberEvent(View view) {
+        if(isNewOp)
+            ed1.setText("");
+        isNewOp=false;
+
+
+        String number=ed1.getText().toString();
+        switch (view.getId()){
+            case R.id.bu1:
+                number +="1";
+                break;
+
+            case R.id.bu2:
+                number +="2";
+                break;
+
+            case R.id.bu3:
+                number +="3";
+                break;
+
+            case R.id.bu4:
+                number +="4";
+                break;
+
+            case R.id.bu5:
+                number +="5";
+                break;
+
+            case R.id.bu6:
+                number +="6";
+                break;
+
+            case R.id.bu7:
+                number +="7";
+                break;
+
+            case R.id.bu8:
+                number +="8";
+                break;
+
+            case R.id.bu9:
+                number +="9";
+                break;
+
+            case R.id.bu0:
+                number +="0";
+                break;
+            case R.id.bu1clr:
+                number ="";
+                break;
+        }
+        ed1.setText(number);
+    }
+
+    public void OperatorEvent(View view) {
+        isNewOp= true;
+        oldNumber=ed1.getText().toString();
+        switch(view.getId())
+        {
+            case R.id.budivide:
+                op="/";
+                break;
+            case R.id.bumul:
+                op="*";
+                break;
+            case R.id.buminus:
+                op="-";
+                break;
+            case R.id.buplus:
+                op="+";
+                break;
+
+        }
+
+    }
+
+    public void EqualEvent(View view) {
+        String newNumber=ed1.getText().toString();
+        double result=0.0;
+        switch (op){
+            case "+":
+                result=Double.parseDouble(oldNumber)+Double.parseDouble(newNumber);
+                break;
+            case "-":
+                result=Double.parseDouble(oldNumber)-Double.parseDouble(newNumber);
+                break;
+            case "/":
+                result=Double.parseDouble(oldNumber)/Double.parseDouble(newNumber);
+                break;
+            case "*":
+                result=Double.parseDouble(oldNumber)*Double.parseDouble(newNumber);
+                break;
+        }
+        ed1.setText(result+"");
+    }
+
+}
