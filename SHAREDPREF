@@ -39,3 +39,46 @@ XML
 
 
 </LinearLayout>
+
+JAVA
+package com.example.sharedpreferences;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.EditText;
+
+public class MainActivity extends AppCompatActivity {
+EditText name1,mobile1;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        name1=findViewById(R.id.name);
+        mobile1=findViewById(R.id.mobile);
+    }
+    protected void onResume() {
+
+        super.onResume();
+        SharedPreferences sh=getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        String s1=sh.getString("name1","");
+        int m1=sh.getInt("mobile1",0);
+        name1.setText(s1);
+        mobile1.setText(String.valueOf(m1));
+        Log.i("test1","test1");
+    }
+    protected void onStop()
+    {
+        super.onStop();
+        SharedPreferences sharedpref=getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        SharedPreferences.Editor myedit=sharedpref.edit();
+        myedit.putString("name1", name1.getText().toString());
+        myedit.putInt("mobile1", Integer.parseInt(mobile1.getText().toString()));
+        myedit.apply();
+        Log.i("test2","test2");
+
+
+    }
+}
