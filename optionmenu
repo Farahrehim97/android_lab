@@ -1,0 +1,80 @@
+main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".option">
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+list.xml
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Home"
+        android:id="@+id/menu_home"/>
+    <item android:title="Settings"
+        android:id="@+id/menu_settings"/>
+    <item android:title="List"
+        android:id="@+id/menu_list"/>
+    <item android:title="Share"
+        android:id="@+id/menu_share"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_share_24"/>
+</menu>
+
+java file
+package com.example.arrayadapter1;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+public class option extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_option);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.list,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id=item.getItemId();
+        if(id==R.id.menu_home)
+        {
+            Toast.makeText(this,"home selected",Toast.LENGTH_SHORT).show();
+        }
+        if(id==R.id.menu_settings)
+        {
+            Toast.makeText(this,"settings selected",Toast.LENGTH_SHORT).show();
+        }
+        if(id==R.id.menu_list)
+        {
+            Toast.makeText(this,"list selected",Toast.LENGTH_SHORT).show();
+        }
+        if(id==R.id.menu_share)
+        {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/"));
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}
