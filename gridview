@@ -1,0 +1,123 @@
+activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+   <GridView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:id="@+id/datagrid"
+       android:numColumns="auto_fit"
+       android:columnWidth="100dp"
+       android:gravity="center"
+       android:layout_margin="10dp"/>
+</LinearLayout>
+
+singleframe.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/iconimage"
+        android:background="#FFFFFF"
+        android:paddingTop="20dp"
+        android:src="@color/design_default_color_primary"
+        />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/textdata"
+    android:textColor="@color/design_default_color_primary_variant"
+    android:text="demo"
+    android:textSize="25dp"
+    />
+
+</LinearLayout>
+
+mainactivity.java
+package com.example.gridadapter;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.GridView;
+
+public class MainActivity extends AppCompatActivity {
+GridView grid;
+
+    int puppy[]=
+            {R.drawable.pupp1,
+                    R.drawable.pupp2,
+                    R.drawable.puppy3,
+                    R.drawable.pupp4,
+                    R.drawable.pupp5,
+                    R.drawable.pupp6
+
+            };
+    String name1[]={"puppy1","puppy2","puppy3","puppy4","puppy5","puppy6"};
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        grid=(GridView)findViewById(R.id.datagrid);
+        grid.setAdapter( new gridAdapter(name1,puppy,this));
+    }
+}
+gridAdapter.java
+package com.example.gridadapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class gridAdapter extends BaseAdapter {
+    private final String name[];
+    private final int images[];
+    Context context;
+
+    public gridAdapter(String[] name, int[] images, Context context) {
+        this.name = name;
+        this.images = images;
+        this.context = context;
+    }
+
+    @Override
+    public int getCount() {
+        return name.length;
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return 0;
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int i, View convertView, ViewGroup viewGroup) {
+        LayoutInflater layoutInflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view=layoutInflater.inflate(R.layout.singleframe,null);
+        ImageView img=(ImageView)view.findViewById(R.id.iconimage);
+        TextView tv=(TextView)view.findViewById(R.id.textdata);
+        img.setImageResource(images[i]);
+        tv.setText(name[i]);
+        return view;
+    }
+}
